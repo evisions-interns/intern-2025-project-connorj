@@ -29,7 +29,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
-    TURSO_DATABASE_URL: process.env.TURSO_DATABSE_URL,
+    TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
