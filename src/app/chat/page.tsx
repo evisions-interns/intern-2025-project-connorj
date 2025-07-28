@@ -10,15 +10,16 @@ import {
   ChatMessageContent,
 } from "@/components/ui/chat-message";
 import { ChatMessageArea } from "@/components/ui/chat-message-area";
+import { useChat } from "@ai-sdk/react";
 
 export default function ChatPage() {
-  const messages = [
-    {
-      id: crypto.randomUUID(),
-      role: "assistant",
-      content: "Hello world",
-    },
-  ];
+  const { messages, handleSubmit, handleInputChange, input, stop, status } =
+    useChat({
+      api: "/chat/endpoint",
+    });
+
+  const isLoading = status === "submitted";
+
   return (
     <div className="flex h-dvh flex-1 flex-col overflow-y-auto">
       <ChatMessageArea scrollButtonAlignment="center">
@@ -47,11 +48,11 @@ export default function ChatPage() {
       </ChatMessageArea>
       <div className="mx-auto w-full max-w-2xl px-2 py-4">
         <ChatInput
-        //value={input}
-        //onChange={handleInputChange}
-        //onSubmit={handleSubmitMessage}
-        //loading={isLoading}
-        // onStop={stop}
+          value={input}
+          onChange={handleInputChange}
+          onSubmit={handleSubmit}
+          loading={isLoading}
+          onStop={stop}
         >
           <ChatInputTextArea placeholder="Type a message..." />
           <ChatInputSubmit />

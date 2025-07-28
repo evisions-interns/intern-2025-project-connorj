@@ -9,6 +9,7 @@ export const env = createEnv({
   server: {
     TURSO_AUTH_TOKEN: z.string(),
     TURSO_DATABASE_URL: z.string(),
+    OPENROUTER_API_KEY: z.string(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -28,6 +29,7 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
     TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
     TURSO_DATABASE_URL: process.env.TURSO_DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
