@@ -4,10 +4,8 @@ import type * as React from "react";
 import { Suspense, isValidElement, memo, useMemo } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 const DEFAULT_PRE_BLOCK_CLASS =
   "my-4 overflow-x-auto w-fit rounded-xl bg-zinc-950 text-zinc-50 dark:bg-zinc-900 border border-border p-4";
-
 const extractTextContent = (node: React.ReactNode): string => {
   if (typeof node === "string") {
     return node;
@@ -16,20 +14,19 @@ const extractTextContent = (node: React.ReactNode): string => {
     return node.map(extractTextContent).join("");
   }
   if (isValidElement(node)) {
-    return extractTextContent(node.props.children);
+    return extractTextContent(
+      (node.props as { children: React.ReactNode }).children,
+    );
   }
   return "";
 };
-
 interface HighlightedPreProps extends React.HTMLAttributes<HTMLPreElement> {
   language: string;
 }
-
 const HighlightedPre = memo(
   async ({ children, className, language, ...props }: HighlightedPreProps) => {
     const { codeToTokens, bundledLanguages } = await import("shiki");
     const code = extractTextContent(children);
-
     if (!(language in bundledLanguages)) {
       return (
         <pre {...props} className={cn(DEFAULT_PRE_BLOCK_CLASS, className)}>
@@ -37,7 +34,6 @@ const HighlightedPre = memo(
         </pre>
       );
     }
-
     const { tokens } = await codeToTokens(code, {
       lang: language as keyof typeof bundledLanguages,
       themes: {
@@ -45,7 +41,6 @@ const HighlightedPre = memo(
         dark: "github-dark",
       },
     });
-
     return (
       <pre {...props} className={cn(DEFAULT_PRE_BLOCK_CLASS, className)}>
         <code className="whitespace-pre-wrap">
@@ -61,7 +56,6 @@ const HighlightedPre = memo(
                   typeof token.htmlStyle === "string"
                     ? undefined
                     : token.htmlStyle;
-
                 return (
                   <span
                     key={`token-${
@@ -82,13 +76,10 @@ const HighlightedPre = memo(
     );
   },
 );
-
 HighlightedPre.displayName = "HighlightedPre";
-
 interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
   language: string;
 }
-
 const CodeBlock = ({
   children,
   language,
@@ -109,9 +100,7 @@ const CodeBlock = ({
     </Suspense>
   );
 };
-
 CodeBlock.displayName = "CodeBlock";
-
 const components: Partial<Components> = {
   h1: ({ children, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 className="mt-2 scroll-m-20 text-4xl font-bold" {...props}>
@@ -240,10 +229,11 @@ const components: Partial<Components> = {
   ),
   img: ({ alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // biome-ignore lint/a11y/useAltText: alt is not required
+    // eslint-disable-next-line @next/next/no-img-element
     <img className="rounded-md" alt={alt} {...props} />
   ),
   code: ({ children, node, className, ...props }) => {
-    const match = /language-(\w+)/.exec(className || "");
+    const match = /language-(\w+)/.exec(className ?? "");
     if (match) {
       return (
         <CodeBlock language={match[1]!} className={className} {...props}>
@@ -265,7 +255,6 @@ const components: Partial<Components> = {
   },
   pre: ({ children }) => <>{children}</>,
 };
-
 function parseMarkdownIntoBlocks(markdown: string): string[] {
   if (!markdown) {
     return [];
@@ -273,12 +262,10 @@ function parseMarkdownIntoBlocks(markdown: string): string[] {
   const tokens = marked.lexer(markdown);
   return tokens.map((token) => token.raw);
 }
-
 interface MarkdownBlockProps {
   content: string;
   className?: string;
 }
-
 const MemoizedMarkdownBlock = memo(
   ({ content, className }: MarkdownBlockProps) => {
     return (
@@ -294,22 +281,18 @@ const MemoizedMarkdownBlock = memo(
     return true;
   },
 );
-
 MemoizedMarkdownBlock.displayName = "MemoizedMarkdownBlock";
-
 interface MarkdownContentProps {
   content: string;
   id: string;
   className?: string;
 }
-
 export const MarkdownContent = memo(
   ({ content, id, className }: MarkdownContentProps) => {
     const blocks = useMemo(
       () => parseMarkdownIntoBlocks(content || ""),
       [content],
     );
-
     return (
       <div className={className}>
         {blocks.map((block, index) => (
@@ -325,5 +308,4 @@ export const MarkdownContent = memo(
     );
   },
 );
-
 MarkdownContent.displayName = "MarkdownContent";
