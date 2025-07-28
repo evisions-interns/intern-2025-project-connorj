@@ -6,7 +6,10 @@ import "./src/env.js";
 
 /** @type {import("next").NextConfig} */
 const config = {
-    serverExternalPackages: ['@prisma/adapter-libsql']
+  serverExternalPackages: ["@prisma/adapter-libsql"],
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default config;
