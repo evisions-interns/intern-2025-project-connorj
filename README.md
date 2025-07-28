@@ -1,106 +1,29 @@
-# Node.js Codespace Template
+# Create T3 App
 
-A GitHub Codespace template for quickly setting up Node.js development environments with modern tooling.
+This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## Features
+## What's next? How do I make an app with this?
 
-- **Node.js 22**: Latest LTS version of Node.js
-- **pnpm**: Fast, disk space efficient package manager
-- **T3 Stack Integration**: Quick setup script for creating T3 apps
-- **Dev Container**: Pre-configured development environment
+We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
 
-## Quick Start
+If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
 
-### Using GitHub Codespaces
+- [Next.js](https://nextjs.org)
+- [NextAuth.js](https://next-auth.js.org)
+- [Prisma](https://prisma.io)
+- [Drizzle](https://orm.drizzle.team)
+- [Tailwind CSS](https://tailwindcss.com)
+- [tRPC](https://trpc.io)
 
-1. Click "Use this template" or fork this repository
-2. Open in GitHub Codespaces
-3. The environment will automatically set up with Node.js 22 and pnpm
+## Learn More
 
-### Setup a T3 App
+To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
 
-Run the setup script to create a new T3 app:
+- [Documentation](https://create.t3.gg/)
+- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
 
-```bash
-./scripts/setup-app.sh
-```
+You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
 
-This script will:
-- Create a new T3 app using the latest template
-- Remove the nested `.git` directory
-- Copy all files to the root directory
-- Clean up temporary files
+## How do I deploy this?
 
-## What's Included
-
-### Development Environment
-- **Node.js 22**: Latest LTS version with modern JavaScript features
-- **pnpm**: Efficient package manager pre-installed globally
-- **Dev Container**: Consistent development environment across all machines
-
-### T3 Stack
-The initialization script sets up a full-stack TypeScript application with:
-- **Next.js**: React framework for production
-- **TypeScript**: Type-safe JavaScript
-- **Tailwind CSS**: Utility-first CSS framework
-- **tRPC**: End-to-end typesafe APIs
-- **Prisma**: Next-generation ORM
-- **NextAuth.js**: Authentication for Next.js
-
-## Directory Structure
-
-```
-.
-├── .devcontainer/          # Dev container configuration
-│   └── devcontainer.json   # Container settings and setup
-├── scripts/                # Utility scripts
-│   └── setup-app.sh        # T3 app setup script
-└── README.md              # This file
-```
-
-## Usage
-
-### Starting Fresh
-If you want to create a new T3 app, simply run:
-```bash
-./scripts/init-app.sh
-```
-
-## Services
-- [Vercel](https://vercel.com/) for Hosting
-- [Turso](https://turso.tech/) for Database
-- [Upstash](https://upstash.com/) for Vector
-
-## Customization
-
-### Modifying the Dev Container
-Edit `.devcontainer/devcontainer.json` to:
-- Change Node.js version
-- Add additional tools or extensions
-- Modify post-creation commands
-
-### Updating the Setup Script
-Modify `scripts/setup-app.sh` to:
-- Use different project templates
-- Add custom setup steps
-- Install additional dependencies
-
-## Requirements
-
-- GitHub account (for Codespaces)
-- Or Docker (for local dev container usage)
-
-## Contributing
-
-1. Fork this repository
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## License
-
-This template is available under the MIT License. See individual project licenses for generated applications.
-
----
-
-**Happy coding!** 🚀
+Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
